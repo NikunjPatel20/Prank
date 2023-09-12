@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <title>Registration Form</title>
+</head>
+
+<body onload='document.form1.email.focus()'>
+  <!-- <body> -->
+  <div class="container mt-5">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">Registration Form</h3>
+        <hr />
+
+        {% for category, message in get_flashed_messages(with_categories=true)
+        %}
+        <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %} {% if error %}
+        <p><strong>Error:</strong> {{ error }} {% endif %}</p>
+
+        <form action="/new" method="post">
+          <div class="mb-3">
+            <label for="fname" class="form-label">First Name</label>
+            <input type="text" class="form-control" name="fname" placeholder="First Name" required />
+          </div>
+          <div class="mb-3">
+            <label for="lname" class="form-label">Last Name</label>
+            <input type="text" class="form-control" name="lname" placeholder="Last Name" required />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" name="email" placeholder="example@gmail.com"
+              onkeyup="ValidateEmail(document.form1.email)" required />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input minlength="6" maxlength="12" type="password" class="form-control" name="password" id="password"
+            placeholder="Password" required />
+          </div>
+          
+          <div class="mb-3">
+            <label for="cnf_password" class="form-label">Confirm Password</label>
+            <input minlength="6" maxlength="12" type="password" class="form-control" name="cnf_password"
+              id="cnf_password" placeholder="Confirm Password" required onkeyup="validate_password()" />
+          </div>
+          <span id="wrong_pass_alert"></span>
+          
+          <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <textarea class="form-control" id="address" name="address" placeholder="Address"
+              onkeyup="countwords()"></textarea>
+          </div>
+          <span id="short_add"></span><br />
+
+          <div class="mb-3">
+            <label class="form-label">Gender</label>
+            <div class="form-check">
+              <input type="radio" class="form-check-input" name="gender" value="male" id="male" checked />
+              <label class="form-check-label" for="male">Male</label>
+            </div>
+            <div class="form-check">
+              <input type="radio" class="form-check-input" name="gender" value="female" id="female" />
+              <label class="form-check-label" for="female">Female</label>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Hobbies</label>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" name="hobby" value="f1" id="f1" onclick="checkifbox()" />
+              <label class="form-check-label" for="f1">Formula 1</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" name="hobby" value="wrc" id="wrc"
+                onclick="checkifbox()" />
+              <label class="form-check-label" for="wrc">World Rally Championship</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" name="hobby" value="dkr" id="dkr"
+                onclick="checkifbox()" />
+              <label class="form-check-label" for="dkr">Dakar Rally</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" name="hobby" value="otr" id="otr" onclick="checkifbox()"
+                checked />
+              <label class="form-check-label" for="otr">Other</label>
+            </div>
+          </div>
+          <span id="tick_hobby"></span><br />
+
+          <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input" value="" required />
+            <label class="form-check-label">I agree to the
+              <a href="/terms">
+                <font size="3">Terms and Conditions</font>
+              </a></label>
+          </div>
+
+          <div>
+            <button type="submit" class="btn btn-primary" id="submit-button">
+              Submit
+            </button>
+          </div>
+
+          <p class="mt-3"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="static/scripts.js"></script>
+</body>
+</html>

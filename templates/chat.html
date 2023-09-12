@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Ask a Question{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row mt-3">
+        <div class="col-12">
+            <div class="joke">
+                <h1>Ask a Question</h1>
+                <form action="/chat" method="post">
+                        <input type="text" name="question" required>
+                        <div class="row">
+                            <div class="col-12"><br>
+                                <button class="btn btn-primary" id="Get Answer">Get Answer</button>
+                                <p></p>
+                            </div>
+                        </div>                        
+                    </form>
+                    {% if question and answer %}
+                    <h2>Your Question:</h2>
+                    <p>{{ question }}</p>
+                    <h2>Answer:</h2>
+                    <p>{{ answer }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <br>
+    {% endblock %}
